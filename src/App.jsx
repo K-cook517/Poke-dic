@@ -30,7 +30,7 @@ function App() {
    const onChange = (e) => setInputName(e.target.value)
 
    const onClick = () => {
-      let pokemonname = inputName.trim() //.trim()= 앞뒤 공백 전체 정리포켓몬 이름에 공백 들어가도 전부 잘라내기
+      let pokemonname = inputName.trim() //.trim()= 앞뒤 공백 전체 정리(포켓몬 이름에 공백 들어가도 전부 잘라내기))
 
       //공백열 입력 방지
       if (!pokemonname) return
