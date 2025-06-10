@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from 'react'
 import PokemonNames from './components/PokemonNames'
 
 function App() {
-   const inputRef = useRef()
+   const inputRef = useRef(null)
    const [pokemons, setPoke] = useState([
       {
          id: 1,
@@ -37,34 +37,33 @@ function App() {
 
       // 왜니드런만한도감안ㄴ에서성별이나뉘었는가ㅠ
       if (pokemonname === '니드런') {
-         const genderInput = prompt('등록하실 니드런의 성별을 입력해주세요 (수컷 또는 암컷):')
-         if (genderInput === '수컷') {
+         const gender = prompt('등록하실 니드런의 성별을 입력해주세요(수컷 또는 암컷):')
+         if (gender === '수컷') {
             pokemonname = '니드런♂'
-         } else if (genderInput === '암컷') {
+         } else if (gender === '암컷') {
             pokemonname = '니드런♀'
          } else {
-            alert('니드런의 올바른 성별을 입력해주세요.')
+            alert('니드런의 올바른 성별을 입력해주세요!')
             return
          }
       } //와씨나천잰듯
 
-      // 관동지방 151마리만 넣을 것!!
+      //관동지방 151마리만 넣을 것!
       if (!PokemonNames.includes(pokemonname)) {
-         alert('해당 포켓몬의 데이터가 존재하지 않습니다.')
+         alert('해당 포켓몬은 도감에 존재하지 않습니다.')
          return
       }
 
-      //중복차단!!
-      //.some = 배열에 하나라도 같은 것이 있다면 true
+      //중복금지!!
       if (pokemons.some((p) => p.name === pokemonname)) {
-         alert('이미 등록된 포켓몬입니다.')
+         alert('이미 도감에 등록된 포켓몬입니다.')
          return
       }
 
       const nextPoke = pokemons.concat({
          id: nextId,
          name: pokemonname,
-         img: `/images/${pokemonname}.png`,
+         img: '/images/${pokemonname}.png',
          disabled: false,
       })
       setPoke(nextPoke)
@@ -93,14 +92,14 @@ function App() {
       <li key={poke.id} onDoubleClick={() => onDisable(poke.id)}>
          <div>
             <img src={poke.img} alt={poke.name} width="130" style={{ filter: poke.disabled ? 'grayscale(100%)' : 'none' }} />
-            <p style={{ color: poke.disabled ? '#999' : 'black' }}>{poke.name}</p>
+            <p>{poke.name}</p>
          </div>
       </li>
    ))
 
    return (
-      <div className="container">
-         <h2>포켓몬 도감</h2>
+      <div>
+         <h1>포켓몬 도감</h1>
          <div>
             <input
                value={inputName}
@@ -109,7 +108,6 @@ function App() {
                onKeyDown={(e) => {
                   if (e.key === 'Enter') onClick()
                }}
-               style={{ marginRight: '10px' }}
                placeholder="151마리 수록!"
             />
             <button onClick={onClick}>포켓몬 도감 등록</button>
