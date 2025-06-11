@@ -35,15 +35,15 @@ function App() {
       //공백열 입력 방지
       if (!pokemonname) return
 
-      // 왜니드런만한도감안ㄴ에서성별이나뉘었는가ㅠ
+      //왜니드런만도감안ㄴ에서성별이둘로나뉘었는가ㅠ
       if (pokemonname === '니드런') {
-         const gender = prompt('등록하실 니드런의 성별을 입력해주세요(수컷 또는 암컷):')
+         const gender = prompt('등록하실 니드런의 성별을 입력해주세요.(수컷 또는 암컷): ')
          if (gender === '수컷') {
             pokemonname = '니드런♂'
          } else if (gender === '암컷') {
             pokemonname = '니드런♀'
          } else {
-            alert('니드런의 올바른 성별을 입력해주세요!')
+            alert('니드런의 올바른 성별을 입력해주세요.')
             return
          }
       } //와씨나천잰듯
@@ -56,6 +56,7 @@ function App() {
 
       //중복금지!!
       if (pokemons.some((p) => p.name === pokemonname)) {
+         //.some() = 배열 안에 등록된 것중 조건을 만족하는 게 있으면 true
          alert('이미 도감에 등록된 포켓몬입니다.')
          return
       }
@@ -63,12 +64,12 @@ function App() {
       const nextPoke = pokemons.concat({
          id: nextId,
          name: pokemonname,
-         img: '/images/${pokemonname}.png',
+         img: `/images/${pokemonname}.png`,
          disabled: false,
       })
       setPoke(nextPoke)
       setNextId(nextId + 1)
-      setInputName('')
+      setInputName(``)
       inputRef.current.focus()
    }
 
